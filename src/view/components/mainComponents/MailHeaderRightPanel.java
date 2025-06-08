@@ -25,4 +25,12 @@ public class MailHeaderRightPanel extends JPanel{
         add(new TextLabel("TEMAT:"));
         add(titleTextField);
     }
+
+    public JTextField getTitleTextField() {
+        return titleTextField;
+    }
+
+    public JTextField getToTextField() {
+        return toTextField;
+    }
 }

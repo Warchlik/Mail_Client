@@ -1,5 +1,6 @@
 package src.view.components.mainComponents;
 
+import src.controllers.MainController;
 import src.view.components.ClockLabel;
 import src.view.components.NewButton;
 
@@ -12,7 +13,7 @@ public class MailTopPanel extends JPanel {
     private NewButton newContactButton;
     private ClockLabel clockLabel;
 
-    public MailTopPanel() {
+    public MailTopPanel(MainController mainController) {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));

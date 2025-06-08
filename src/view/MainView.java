@@ -3,36 +3,45 @@ package src.view;
 import javax.swing.*;
 import java.awt.*;
 
+import src.Services.EmailService;
+import src.controllers.MailController;
+import src.controllers.MainController;
+import src.images.Main;
 import src.view.components.mainComponents.MailLeftPanel;
 import src.view.components.mainComponents.MailPreviewRightPanel;
 import src.view.components.mainComponents.MailTopPanel;
 
 public class MainView extends JFrame {
-    private DefaultListModel<String> sentModel;
-    private JList<String> sentList;
+    private MainController mainController;
 
-    private final MailTopPanel mailTopPanel;
-    private final MailPreviewRightPanel mailPreviewRightPanel;
-    private final MailLeftPanel mailLeftPanel;
+    private MailTopPanel mailTopPanel;
+    private MailPreviewRightPanel mailPreviewRightPanel;
+    private MailLeftPanel mailLeftPanel;
 
-    public MainView() {
+    public MainView(MainController mainController) {
         super("PJATK Mail");
+        this.mainController = mainController;
+        initComponent();
+        initVariable();
+        setComponent();
+    }
 
-        this.sentModel = new DefaultListModel<>();
-        this.sentList = new JList<>(sentModel);
-
-        this.mailTopPanel =  new MailTopPanel();
-        this.mailLeftPanel = new MailLeftPanel(sentList);
-        this.mailPreviewRightPanel = new MailPreviewRightPanel();
-
-
-        getContentPane().add(mailTopPanel , BorderLayout.NORTH);
-        getContentPane().add(mailLeftPanel, BorderLayout.WEST);
-        getContentPane().add(mailPreviewRightPanel, BorderLayout.CENTER);
-
+    private void initComponent(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
+    }
+
+    private void initVariable(){
+        this.mailTopPanel =  new MailTopPanel(mainController);
+        this.mailPreviewRightPanel = new MailPreviewRightPanel(mainController);
+        this.mailLeftPanel = new MailLeftPanel(mainController , mailPreviewRightPanel);
+    }
+
+    private void setComponent(){
+        add(mailTopPanel , BorderLayout.NORTH);
+        add(mailLeftPanel, BorderLayout.WEST);
+        add(mailPreviewRightPanel, BorderLayout.CENTER);
     }
 
     public MailTopPanel getMailTopPanel(){
@@ -45,13 +54,5 @@ public class MainView extends JFrame {
 
     public MailPreviewRightPanel getMailPreviewRightPanel(){
         return this.mailPreviewRightPanel;
-    }
-
-    public DefaultListModel<String> getSentModel(){
-        return this.sentModel;
-    }
-
-    public JList<String> getSentList(){
-        return this.sentList;
     }
 }

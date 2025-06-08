@@ -7,8 +7,13 @@ public class Contact {
 
     public Contact(String firstName, String lastName, String email) {
         this.firstName = firstName;
-        this.lastName  = lastName;
-        this.email     = email;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    @Override
+    public String toString(){
+        return firstName + " " + lastName;
     }
 
     @Override

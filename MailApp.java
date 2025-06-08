@@ -1,5 +1,4 @@
 import src.controllers.MainController;
-import src.view.MainView;
 import javax.swing.*;
 
 public class MailApp {
