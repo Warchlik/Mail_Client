@@ -1,5 +1,7 @@
 package src.view;
 
+import src.Helpers.ValidatorHelper;
+import src.Services.EmailService;
 import src.controllers.ContactController;
 import src.view.components.addMailComponents.ContactFormComponent;
 import src.view.components.DoubleButtonPanel;
@@ -50,13 +52,26 @@ public class ContactAddView extends JDialog{
     private void clickListener(){
 
         doubleButtonPanel.getFirstButton().addActionListener(event -> {
-            contactController.addCustomer(
-                    contactFormComponent.getFirstNameField().getText(),
-                    contactFormComponent.getLastNameField().getText(),
-                    contactFormComponent.getEmailField().getText()
+            String name = contactFormComponent.getFirstNameField().getText();
+            String lastName = contactFormComponent.getLastNameField().getText();
+            String email = contactFormComponent.getEmailField().getText();
+
+            int result = JOptionPane.showConfirmDialog(
+                    this,
+                    "Czy na pewno chcesz dodać ten kontakt ?",
+                    "Potwierdź",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
             );
-            this.clearFields();
-            contactController.closeDialog(this);
+
+            if (result == JOptionPane.YES_OPTION){
+                boolean isValidate = ValidatorHelper.validContactInput(this, name, lastName, email);
+                if (isValidate){
+                    contactController.addCustomer(name , lastName , email);
+                    this.clearFields();
+                    contactController.closeDialog(this);
+                }
+            }
         });
 
         doubleButtonPanel.getSecoundButton().addActionListener(event -> {

@@ -1,5 +1,6 @@
 package src.view;
 
+import src.Helpers.ValidatorHelper;
 import src.Services.ContactService;
 import src.Services.EmailService;
 import src.controllers.MailController;
@@ -30,22 +31,7 @@ public class EmailAddView extends JDialog {
         initVariable();
         setComponent();
 
-        doubleButtonPanel.getFirstButton().addActionListener(event -> {
-            mailController.sendMail(
-                    mailAddHeaderComponent.getToField().getText(),
-                    mailAddHeaderComponent.getSubjectField().getText(),
-                    textAreaComponent.getTextArea().getText()
-            );
-            System.out.println(EmailService.getInstance().getEmailList());
-            System.out.println(EmailService.getInstance().getDefaultEmailList());
-            clearFields();
-            this.setVisible(false);
-        });
-
-        doubleButtonPanel.getSecoundButton().addActionListener(event -> {
-            clearFields();
-            this.setVisible(false);
-        });
+        bindClickAction();
 
         windowCloseListener();
     }
@@ -73,6 +59,40 @@ public class EmailAddView extends JDialog {
         mailAddHeaderComponent.setToField("");
         mailAddHeaderComponent.setSubjectField("");
         textAreaComponent.setTextArea("");
+    }
+
+    private void bindClickAction(){
+        doubleButtonPanel.getFirstButton().addActionListener(event -> {
+
+            String toField = mailAddHeaderComponent.getToField().getText();
+            String title = mailAddHeaderComponent.getSubjectField().getText();
+            String text = textAreaComponent.getTextArea().getText();
+
+            int result = JOptionPane.showConfirmDialog(
+                    this,
+                    "Czy na pewno chcesz wysłać maila? ",
+                    "Potwierdź",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.PLAIN_MESSAGE,
+                    null
+            );
+
+            if (result == JOptionPane.YES_OPTION){
+                boolean isValidate = ValidatorHelper.validateMailInput(this, toField, title, text);
+                if (isValidate){
+                    mailController.sendMail(toField, title, text);
+                    System.out.println(EmailService.getInstance().getEmailList());
+                    System.out.println(EmailService.getInstance().getDefaultEmailList());
+                    this.clearFields();
+                    this.setVisible(false);
+                }
+            }
+        });
+
+        doubleButtonPanel.getSecoundButton().addActionListener(event -> {
+            clearFields();
+            this.setVisible(false);
+        });
     }
 
     private void windowCloseListener(){

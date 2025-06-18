@@ -52,7 +52,7 @@ public class MailController extends Controller<EmailAddView>{
     public void sendMail(String toField , String title , String text){
         emailService.getEmailList().add(new Email(toField , title , text));
         refreshEmailModel();
-        // tutaj jeszcze trzeba dodać obsługe wysyłania maila
+        //TODO -> tutaj jeszcze trzeba dodać obsługe wysyłania maila
     }
 
     public DefaultListModel<Email> getEmailListModel(){
