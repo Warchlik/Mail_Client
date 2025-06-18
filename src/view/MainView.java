@@ -3,10 +3,7 @@ package src.view;
 import javax.swing.*;
 import java.awt.*;
 
-import src.Services.EmailService;
-import src.controllers.MailController;
 import src.controllers.MainController;
-import src.images.Main;
 import src.view.components.mainComponents.MailLeftPanel;
 import src.view.components.mainComponents.MailPreviewRightPanel;
 import src.view.components.mainComponents.MailTopPanel;

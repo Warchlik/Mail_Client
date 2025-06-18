@@ -9,17 +9,32 @@ public class MailPreviewRightPanel extends JPanel {
 
     private MailHeaderRightPanel mailHeaderRightPanel;
     private JTextArea textArea;
+    private JScrollPane scrollPane;
 
     public MailPreviewRightPanel(MainController mainController){
-        this.mailHeaderRightPanel = new MailHeaderRightPanel();
-        setLayout(new BorderLayout(5,5));
+        initComponent();
+        initVariables();
+        uploadElement();
+    }
 
-        this.add(mailHeaderRightPanel, BorderLayout.NORTH);
+    private void initComponent(){
+        setLayout(new BorderLayout(5,5));
+    }
+    
+    private void initVariables(){
+        this.mailHeaderRightPanel = new MailHeaderRightPanel();
         this.textArea = new JTextArea();
         this.textArea.setEditable(false);
-        this.textArea.setDoubleBuffered(true);
-        this.add(new JScrollPane(this.textArea), BorderLayout.CENTER);
+
+        this.scrollPane = new JScrollPane(this.textArea);
+        this.scrollPane.setBorder(null);
     }
+
+    private void uploadElement(){
+        this.add(mailHeaderRightPanel, BorderLayout.NORTH);
+        this.add(this.scrollPane, BorderLayout.CENTER);
+    }
+
 
     public MailHeaderRightPanel getMailHeaderRightPanel() {
         return mailHeaderRightPanel;

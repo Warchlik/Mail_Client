@@ -1,8 +1,8 @@
 package src.view.components.addMailComponents;
 
-import src.controllers.ContactController;
 import src.controllers.MailController;
 import src.models.Contact;
+import src.view.components.CustomButton;
 import src.view.components.TextLabel;
 
 import javax.swing.*;
@@ -36,7 +36,7 @@ public class MailAddHeaderComponent extends JPanel {
     private void initVariables() {
         toLabel = new TextLabel("DO:");
         toField = new JTextField(20);
-        choiceButton = new JButton("WYBIERZ");
+        choiceButton = new CustomButton("WYBIERZ");
         subjectLabel = new TextLabel("TEMAT:");
         subjectField = new JTextField(20);
     }

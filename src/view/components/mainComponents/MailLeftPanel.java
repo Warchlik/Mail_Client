@@ -35,7 +35,10 @@ public class MailLeftPanel extends JPanel {
 
     public void initVariable() {
         emailList = new JList<>(emailDefaultListModel);
+        
         scrollList = new JScrollPane(emailList);
+        scrollList.setBorder(null);
+
         textLabel = new TextLabel("Wysłane wiadomości:");
     }
 

@@ -4,8 +4,9 @@ import src.controllers.MainController;
 import src.view.components.ClockLabel;
 import src.view.components.NewButton;
 
+import java.awt.Color;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class MailTopPanel extends JPanel {
 
@@ -16,7 +17,7 @@ public class MailTopPanel extends JPanel {
     public MailTopPanel(MainController mainController) {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        setBorder(BorderFactory.createLineBorder(Color.GRAY, 2));
 
         this.newMailButton = new NewButton("Utwórz Mail", "/src/images/mail.png");
         this.newContactButton = new NewButton("Utwórz Kontakt", "/src/images/add.png");

@@ -2,7 +2,6 @@ package src.view;
 
 import src.Services.ContactService;
 import src.Services.EmailService;
-import src.controllers.ContactController;
 import src.controllers.MailController;
 import src.view.components.DoubleButtonPanel;
 import src.view.components.addMailComponents.MailAddHeaderComponent;
